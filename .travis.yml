@@ -1,0 +1,23 @@
+arch:
+- amd64
+os: linux
+dist: bionic
+language: shell
+jobs:
+  include:
+  - arch: arm64
+    script:
+    - make image
+    env:
+    - ARCH=arm
+deploy:
+- provider: script
+  script: bash deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD
+  on:
+    branch: master
+env:
+  global:
+  - MAKE_BRANCH=master
+  - BUILD_IMAGE=jchorl/pod2daemon-flexvol
+  - DOCKER_USERNAME=jchorl
+  - secure: wY3h3bDH2pKCPLt435q4aOLaJURXLEKwctsofwSwTb8TjksKogd18RQdw8dzbxAPRZXzsrClUeK/dbsKZtTMwq+Byt671/YfB3L01YIknaL0A5bSz28hL3wM3PAICpiLd5esDPs0O7LV5lDHittibU4jTlHVUr0GT03v3HeM9nopzhuUUlWFwzNjBPPG0Zv4juvzT02cxRubDvJ1f9fa8b12k6gWdoJe8aUJCr+Bj4W2bzKqxtMJBe0/LDpMX42epFP7agIvW2zUmcO2CWgqghOmG95JGlPwQPfA3VpQKDkOvLcNvb1xIyHx7SSaoASs3r13b27X+FYFeeHclbP4QOc0uvkA/mmtoGZnGyqbURCl1Xrp1pimosY4salxlGLHlJVyIXfwJyO7VNVkYkq/3iDEBQCh1bKB7WMiBkgjhE+rcxrkw3xBaQhhNui2qhw68x2qLmg05vo6FQdoMhvxHvkmWL5KJPVBB1ly6HJKKnLLj8vcZURrmLNo4USaJ5w+nA0O9mubBHhMVnmtgFeG3EF1kcxUPRq8AX9xjNHrgQrW3/g405LsWTHiIXTq4BKqKRRT/AFUaqiST69bM/1/RTZM0rP5kQOOR6M75Xkg7i0Oii445uHOddqlG6tbdAti2OZEjnzTP5aOXrGY5TBMsV7J8V3rO4hMfrwQgSqHwN8=

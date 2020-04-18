@@ -5,7 +5,7 @@ GO_BUILD_VER?=v0.28
 # Download and include Makefile.common before anything else
 ###############################################################################
 MAKE_BRANCH?=$(GO_BUILD_VER)
-MAKE_REPO?=https://raw.githubusercontent.com/projectcalico/go-build/$(MAKE_BRANCH)
+MAKE_REPO?=https://raw.githubusercontent.com/jchorl/go-build/$(MAKE_BRANCH)
 
 Makefile.common: Makefile.common.$(MAKE_BRANCH)
 	cp "$<" "$@"
@@ -51,6 +51,7 @@ build: bin/flexvol-$(ARCH)
 
 bin/flexvol-amd64: ARCH=amd64
 bin/flexvol-arm64: ARCH=arm64
+bin/flexvol-arm: ARCH=arm
 bin/flexvol-ppc64le: ARCH=ppc64le
 bin/flexvol-s390x: ARCH=s390x
 bin/flexvol-%: $(SRC_FILES)
